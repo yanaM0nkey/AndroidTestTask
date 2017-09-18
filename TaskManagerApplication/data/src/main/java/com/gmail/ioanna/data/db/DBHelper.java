@@ -8,8 +8,8 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "tasks";
-    private static final int VERSION = 0;
+    private static final String DATABASE_NAME = "newTasks";
+    private static final int VERSION = 1;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -18,15 +18,14 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREAT TABLE tasks ('name' TEXT, 'percentOfCompletion' INTEGER, " +
-                "'state' TEXT, 'estimatedTime' INTEGER, 'startDate' DATETIME DEFAULT CURRENT_DATE," +
-                " 'dueDate' DATETIME DEFAULT CURRENT_DATE)");
+        db.execSQL("CREATE TABLE newTasks ('id' INTEGER PRIMARY KEY AUTOINCREMENT,'name' TEXT, " +
+                "'percentOfCompletion' INTEGER, 'state' TEXT, 'estimatedTime' INTEGER, " +
+                "'startDate' TEXT, 'dueDate' TEXT)");
         Log.e("DBHelper", "onCreate()");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         Log.e("DBHelper", "onUpgrade()");
-
     }
 }

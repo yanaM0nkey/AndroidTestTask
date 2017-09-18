@@ -6,23 +6,34 @@ import java.util.Date;
 
 public class Task {
 
+    private int id;
     private String name;
     private int percentOfCompletion;
     private String state;
     private int estimatedTime;
-    private Date startDate;
-    private Date dueDate;
+    private String startDate;
+    private String dueDate;
 
     public Task() {
     }
 
-    public Task(String name, int percentOfCompletion, String state, int estimatedTime, Date startDate, Date dueDate) {
+    public Task(int id, String name, int percentOfCompletion, String state, int estimatedTime,
+                String startDate, String dueDate){
+        this.id = id;
         this.name = name;
         this.percentOfCompletion = percentOfCompletion;
         this.state = state;
         this.estimatedTime = estimatedTime;
         this.startDate = startDate;
         this.dueDate = dueDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -57,22 +68,23 @@ public class Task {
         this.estimatedTime = estimatedTime;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) throws ParseException {
-        this.startDate = parse(startDate);
+    public void setStartDate(String startDate){
+        this.startDate = startDate;
     }
 
-    public Date getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) throws ParseException {
-        this.dueDate = parse(dueDate);
+    public void setDueDate(String dueDate){
+        this.dueDate = dueDate;
     }
 
+    //хотела изначально делать с Date
     public Date parse(String date) throws ParseException{
         SimpleDateFormat format = new SimpleDateFormat();
         format.applyPattern("yyyy-MM-dd");
