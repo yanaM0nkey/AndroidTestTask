@@ -39,10 +39,10 @@ public class TaskItemViewModel extends BaseItemViewModel<Task> {
 
     public void onButtonClick(){
         Log.e("AAA", "Click");
-        //временно
-        Intent intent = new Intent(activity, CreateActivity.class);
+        Intent intent = new Intent(activity, EditActivity.class);
         intent.putExtra("id", id.get());
         Log.e("AAA", String.valueOf(id.get()));
         activity.startActivity(intent);
     }
+
 }

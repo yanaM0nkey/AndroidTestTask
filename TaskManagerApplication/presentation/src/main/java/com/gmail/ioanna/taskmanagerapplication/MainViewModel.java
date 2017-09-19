@@ -26,12 +26,16 @@ public class MainViewModel implements BaseViewModel{
     public MainViewModel(Activity activity) {
         this.activity = activity;
         adapter = new TaskAdapter(activity);
-        manager = new DatabaseManager(activity);
+        manager = manager.getInstance(activity);
     }
 
     @Override
     public void init() {
-
+         /*manager.open(true);
+        manager.insertTask(new Task(1,"Task", 0, "New", 25, "17.09.2017", "21.09.2017"));
+        manager.insertTask(new Task(2,"Health&Food", 20, "Done", 25, "17.09.2017", "21.09.2017"));
+        manager.insertTask(new Task(3,"GAme", 55, "In Progress", 25, "17.09.2017", "21.09.2017"));
+        manager.close();*/
     }
 
     @Override
@@ -42,11 +46,7 @@ public class MainViewModel implements BaseViewModel{
 
     @Override
     public void resume() {
-        /*manager.open(true);
-        manager.insertTask(new Task(4,"GAme", 0, "New", 25, "17.09.2017", "21.09.2017"));
 
-
-        manager.close();*/
         manager.open(false);
 
         List<Task> list = manager.getTasks();

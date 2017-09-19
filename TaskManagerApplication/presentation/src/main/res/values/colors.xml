@@ -8,4 +8,5 @@
     <color name="task_color">#cc64de</color>
     <color name="state">#ea6e2c</color>
     <color name="text">#7d7c80</color>
+    <color name="hint">#b7b6ba</color>
 </resources>

@@ -26,4 +26,8 @@ public class TaskAdapter extends BaseAdapter<Task, TaskItemViewModel> {
                 parent, itemViewModel);
     }
 
+    @Override
+    public int getItemCount() {
+        return super.getItemCount();
+    }
 }

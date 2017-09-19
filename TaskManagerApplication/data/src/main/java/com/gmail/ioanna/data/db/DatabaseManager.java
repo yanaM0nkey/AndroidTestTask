@@ -1,5 +1,6 @@
 package com.gmail.ioanna.data.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,11 +15,29 @@ import java.util.List;
 
 public class DatabaseManager {
 
+    private static final String ID = "id";
+    private static final String NAME = "name";
+    private static final String PERCENT_OF_COMPLETION = "percentOfCompletion";
+    private static final String STATE = "state";
+    private static final String ESTIMATED_TIME = "estimatedTime";
+    private static final String START_TIME = "startDate";
+    private static final String DUE_TIME = "dueDate";
+
+    private static DatabaseManager instance;
+
     private Context context;
     private DBHelper dbHelper;
     private SQLiteDatabase database;
 
-    public DatabaseManager(Context context){
+    //Singleton
+    public static DatabaseManager getInstance(Context context){
+        if(instance == null){
+            instance = new DatabaseManager(context);
+        }
+        return instance;
+    }
+
+    private DatabaseManager(Context context){
         this.context = context;
         dbHelper = new DBHelper(context);
     }
@@ -66,7 +85,18 @@ public class DatabaseManager {
 
     }
 
-    public void updateTask(Task task){
+    public int updateTask(Task task){
+
+        ContentValues values = new ContentValues();
+        values.put(NAME, task.getName());
+        values.put(PERCENT_OF_COMPLETION, task.getPercentOfCompletion());
+        values.put(STATE, task.getState());
+        values.put(ESTIMATED_TIME, task.getEstimatedTime());
+        values.put(START_TIME, task.getStartDate());
+        values.put(DUE_TIME, task.getDueDate());
+
+        return database.update("newTasks", values, ID + " = ?",
+                new String[] { String.valueOf(task.getId()) });
 
     }
 
@@ -75,8 +105,8 @@ public class DatabaseManager {
         List<Task> listTasks = new ArrayList<>();
 
         // Зададим условие для выборки - список столбцов
-        String[] projection = {"id", "name", "percentOfCompletion", "state", "estimatedTime",
-                "startDate", "dueDate"};
+        String[] projection = {ID, NAME, PERCENT_OF_COMPLETION, STATE, ESTIMATED_TIME,
+                START_TIME, DUE_TIME};
 
         // Делаем запрос
         Cursor cursor = database.query(
@@ -92,13 +122,13 @@ public class DatabaseManager {
             Log.e("getTasks()","Таблица содержит " + cursor.getCount() + " гостей.\n\n");
 
             // Узнаем индекс каждого столбца
-            int idColumnIndex = cursor.getColumnIndex("id");
-            int nameColumnIndex = cursor.getColumnIndex("name");
-            int percentOfCompletionColumnIndex = cursor.getColumnIndex("percentOfCompletion");
-            int stateColumnIndex = cursor.getColumnIndex("state");
-            int estimatedTimeColumnIndex = cursor.getColumnIndex("estimatedTime");
-            int startDateColumnIndex = cursor.getColumnIndex("startDate");
-            int dueDateColumnIndex = cursor.getColumnIndex("dueDate");
+            int idColumnIndex = cursor.getColumnIndex(ID);
+            int nameColumnIndex = cursor.getColumnIndex(NAME);
+            int percentOfCompletionColumnIndex = cursor.getColumnIndex(PERCENT_OF_COMPLETION);
+            int stateColumnIndex = cursor.getColumnIndex(STATE);
+            int estimatedTimeColumnIndex = cursor.getColumnIndex(ESTIMATED_TIME);
+            int startDateColumnIndex = cursor.getColumnIndex(START_TIME);
+            int dueDateColumnIndex = cursor.getColumnIndex(DUE_TIME);
 
             // Проходим через все ряды
             while (cursor.moveToNext()) {
@@ -122,45 +152,44 @@ public class DatabaseManager {
         return listTasks;
     }
 
-   /* public User getUserById(String id){
+    public Task getTaskById(int id){
 
-        Cursor cursor = database.rawQuery("SELECT * FROM user INNER JOIN country ON " +
+        /*Cursor cursor = database.rawQuery("SELECT * FROM user INNER JOIN country ON " +
                         "user.countryId = country.id WHERE id = ?",
-                new String[]{String.valueOf(id)});
+                new String[]{String.valueOf(id)});*/
 
-        //Cursor cursor1 = database.rawQuery("SELECT * FROM user WHERE id = " + id, null);
+        Cursor cursor = database.rawQuery("SELECT * FROM newTasks WHERE id = " + id, null);
 
         if(cursor != null){
 
-            User user = new User();
+            Task task = new Task();
 
+            //INSERT INTO tasks('id', 'name', 'percentOfCompletion', 'state', 'estimatedTime', 'startDate', 'dueDate') VALUES (1, 'name', 100, 'New', 90, 2017-08-12, 2017-10-20)
             //вытягиваем данные из Cursor
             cursor.moveToFirst();
-            int userId = cursor.getInt(0);
+            int taskId = cursor.getInt(0);
             String name = cursor.getString(1);
-            int age = cursor.getInt(2);
-            int countryId = cursor.getInt(3);
-            String countryName = cursor.getString(4);
+            int percentOfCompletion = cursor.getInt(2);
+            String state = cursor.getString(3);
+            int estimatedTime = cursor.getInt(4);
+            String startDate = cursor.getString(5);
+            String dueDate = cursor.getString(6);
 
-            //заполняем объект User
-            user.setId(userId);
-            user.setName(name);
-            user.setAge(age);
+            //заполняем объект Task
+            task.setId(taskId);
+            task.setName(name);
+            task.setPercentOfCompletion(percentOfCompletion);
+            task.setState(state);
+            task.setEstimatedTime(estimatedTime);
+            task.setStartDate(startDate);
+            task.setDueDate(dueDate);
 
-            //заполняем Country
-            Country country = new Country();
-            country.setId(countryId);
-            country.setName(countryName);
-
-            user.setCountry(country);
-
-            return user;
+            return task;
 
         }else{
-            Log.e("DatabaseManager","getUserById() cursor is null");
+            Log.e("DatabaseManager","getTaskById() cursor is null");
         }
-
         return null;
-    }*/
+    }
 
 }

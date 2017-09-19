@@ -12,7 +12,7 @@
 
         <variable
             name="model"
-            type="com.gmail.ioanna.taskmanagerapplication.CreateViewModel"/>
+            type="com.gmail.ioanna.taskmanagerapplication.EditViewModel"/>
 
     </data>
 
@@ -240,7 +240,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/button"
             android:background="@color/white"
-            android:text="@string/Create"
+            android:text="@string/Save"
             android:textColor="@color/task_color"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

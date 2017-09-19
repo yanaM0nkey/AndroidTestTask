@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Task Manager</string>
+    <string name="name">Name</string>
+    <string name="percentOfCompletion">Percent of completion(%)</string>
+    <string name="state">State</string>
+    <string name="estimetedTime">Estimated time(hours)</string>
+    <string name="startDate">Start date</string>
+    <string name="dueDate">Due date</string>
+    <string name="Save">save</string>
+    <string name="Create">create</string>
+
+    <string-array name="stateList">
+        <item>New</item>
+        <item>In Progress</item>
+        <item>Done</item>
+    </string-array>
+
+    <string-array name="percentList">
+        <item>0</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+    </string-array>
+
+
 </resources>
