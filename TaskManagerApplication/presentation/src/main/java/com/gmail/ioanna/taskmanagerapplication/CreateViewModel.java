@@ -4,6 +4,8 @@ package com.gmail.ioanna.taskmanagerapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.ObservableField;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import com.gmail.ioanna.data.db.DatabaseManager;
 import com.gmail.ioanna.data.dbEntity.Task;
@@ -29,41 +31,45 @@ public class CreateViewModel implements BaseViewModel {
     }
 
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     @Override
-    public void release() {
-
-    }
+    public void release() {}
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() {}
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 
     public void onButtonClick(){
         Task task = new Task();
-        task.setId(count++);
-        task.setName(name.get());
-        task.setPercentOfCompletion(Integer.valueOf(percentOfCompletion.get()));
-        task.setState(state.get());
-        task.setEstimatedTime(Integer.valueOf(estimatedTime.get()));
-        task.setStartDate(startDate.get());
-        task.setDueDate(dueDate.get());
 
-        manager.open(true);
-        manager.insertTask(task);
-        manager.close();
+        try {
+            task.setId(count++);
+            task.setName(name.get());
+            task.setPercentOfCompletion(Integer.valueOf(percentOfCompletion.get()));
+            task.setState(state.get());
+            task.setEstimatedTime(Integer.valueOf(estimatedTime.get()));
+            task.setStartDate(startDate.get());
+            task.setDueDate(dueDate.get());
+            manager.open(true);
+            manager.insertTask(task);
+            manager.close();
+        } catch (Exception e){
+            showError(activity);
+        }
 
         Intent intent = new Intent(activity, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         activity.startActivity(intent);
     }
+
+    public static void showError(Activity activity){
+        Toast toast = Toast.makeText(activity.getApplicationContext(),
+                "Error, check data!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
 }

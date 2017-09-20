@@ -3,9 +3,7 @@ package com.gmail.ioanna.taskmanagerapplication;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
-import android.support.v7.widget.AppCompatSpinner;
 import android.util.Log;
 
 import com.gmail.ioanna.data.db.DatabaseManager;
@@ -33,16 +31,10 @@ public class EditViewModel implements BaseViewModel {
     }
 
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     @Override
-    public void release() {
-
-
-
-    }
+    public void release() {}
 
     @Override
     public void resume() {
@@ -58,24 +50,27 @@ public class EditViewModel implements BaseViewModel {
     }
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 
     public void onButtonClick(){
-
         Task task = new Task();
 
-        task.setId(id);
-        task.setName(name.get());
-        task.setPercentOfCompletion(Integer.valueOf(percentOfCompletion.get()));
-        task.setState(state.get());
-        task.setEstimatedTime(Integer.valueOf(estimatedTime.get()));
-        task.setStartDate(startDate.get());
-        task.setDueDate(dueDate.get());
-
+        try {
+            task.setId(id);
+            task.setName(name.get());
+            task.setPercentOfCompletion(Integer.valueOf(percentOfCompletion.get()));
+            task.setState(state.get());
+            task.setEstimatedTime(Integer.valueOf(estimatedTime.get()));
+            task.setStartDate(startDate.get());
+            task.setDueDate(dueDate.get());
+        }catch(Exception e){
+            CreateViewModel.showError(activity);
+        }
         manager.open(true);
         int count = manager.updateTask(task);
+        if(count == 1){
+            CreateViewModel.showError(activity);
+        }
         Log.e("onClick edit", String.valueOf(count));
         manager.close();
 

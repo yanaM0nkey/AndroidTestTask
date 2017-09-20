@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.gmail.ioanna.data.dbEntity.Task;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,46 +57,58 @@ public class DatabaseManager {
 
     public void insertTask(Task task){
 
-        StringBuilder sql = new StringBuilder();
+        database.beginTransaction();
+        try {
+            StringBuilder sql = new StringBuilder();
 
-        //INSERT INTO tasks('id', 'name', 'percentOfCompletion', 'state', 'estimatedTime', 'startDate', 'dueDate') VALUES (1, 'name', 100, 'New', 90, 2017-08-12, 2017-10-20)
-        sql.append("INSERT INTO newTasks ('id', 'name', 'percentOfCompletion', 'state', 'estimatedTime', " +
-                "'startDate', 'dueDate') ");
-        sql.append("VALUES (");
-        sql.append("'");
-        sql.append(task.getId());
-        sql.append("', '");
-        sql.append(task.getName());
-        sql.append("', ");
-        sql.append(task.getPercentOfCompletion());
-        sql.append(", '");
-        sql.append(task.getState());
-        sql.append("', ");
-        sql.append(task.getEstimatedTime());
-        sql.append(", '");
-        sql.append(task.getStartDate());
-        sql.append("', '");
-        sql.append(task.getDueDate());
-        sql.append("')");
+            //INSERT INTO tasks('id', 'name', 'percentOfCompletion', 'state', 'estimatedTime', 'startDate', 'dueDate') VALUES (1, 'name', 100, 'New', 90, 2017-08-12, 2017-10-20)
+            sql.append("INSERT INTO newTasks ('id', 'name', 'percentOfCompletion', 'state', 'estimatedTime', " +
+                    "'startDate', 'dueDate') ");
+            sql.append("VALUES (");
+            sql.append("'");
+            sql.append(task.getId());
+            sql.append("', '");
+            sql.append(task.getName());
+            sql.append("', ");
+            sql.append(task.getPercentOfCompletion());
+            sql.append(", '");
+            sql.append(task.getState());
+            sql.append("', ");
+            sql.append(task.getEstimatedTime());
+            sql.append(", '");
+            sql.append(task.getStartDate());
+            sql.append("', '");
+            sql.append(task.getDueDate());
+            sql.append("')");
 
-        Log.e("DataBaseManager", "insertUser() sql = " + sql.toString());
-        database.execSQL(sql.toString());
+            Log.e("DataBaseManager", "insertUser() sql = " + sql.toString());
+            database.execSQL(sql.toString());
+            database.setTransactionSuccessful();
+        }finally {
+            database.endTransaction();
+        }
 
     }
 
     public int updateTask(Task task){
 
-        ContentValues values = new ContentValues();
-        values.put(NAME, task.getName());
-        values.put(PERCENT_OF_COMPLETION, task.getPercentOfCompletion());
-        values.put(STATE, task.getState());
-        values.put(ESTIMATED_TIME, task.getEstimatedTime());
-        values.put(START_TIME, task.getStartDate());
-        values.put(DUE_TIME, task.getDueDate());
-
-        return database.update("newTasks", values, ID + " = ?",
-                new String[] { String.valueOf(task.getId()) });
-
+        database.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(NAME, task.getName());
+            values.put(PERCENT_OF_COMPLETION, task.getPercentOfCompletion());
+            values.put(STATE, task.getState());
+            values.put(ESTIMATED_TIME, task.getEstimatedTime());
+            values.put(START_TIME, task.getStartDate());
+            values.put(DUE_TIME, task.getDueDate());
+            return database.update("newTasks", values, ID + " = ?",
+                    new String[]{String.valueOf(task.getId())});
+        }catch(Exception e){
+            return 1;
+        }
+        finally {
+            database.endTransaction();
+        }
     }
 
     public List<Task> getTasks(){

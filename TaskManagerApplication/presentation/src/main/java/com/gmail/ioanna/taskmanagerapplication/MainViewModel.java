@@ -39,10 +39,7 @@ public class MainViewModel implements BaseViewModel{
     }
 
     @Override
-    public void release() {
-
-
-    }
+    public void release() {}
 
     @Override
     public void resume() {
@@ -59,11 +56,8 @@ public class MainViewModel implements BaseViewModel{
         }
         manager.close();
 
-
     }
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 }

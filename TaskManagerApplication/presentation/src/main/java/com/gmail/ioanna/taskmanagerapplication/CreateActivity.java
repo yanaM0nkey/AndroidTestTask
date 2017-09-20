@@ -3,7 +3,6 @@ package com.gmail.ioanna.taskmanagerapplication;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.gmail.ioanna.taskmanagerapplication.base.BaseAppCompatActivity;
 import com.gmail.ioanna.taskmanagerapplication.databinding.ActivityCreateBinding;
