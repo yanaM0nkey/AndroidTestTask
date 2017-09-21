@@ -92,7 +92,7 @@ public class DatabaseManager {
 
     public int updateTask(Task task){
 
-        database.beginTransaction();
+        //database.beginTransaction();
         try {
             ContentValues values = new ContentValues();
             values.put(NAME, task.getName());
@@ -104,11 +104,11 @@ public class DatabaseManager {
             return database.update("newTasks", values, ID + " = ?",
                     new String[]{String.valueOf(task.getId())});
         }catch(Exception e){
-            return 1;
+            return 100;
         }
-        finally {
+        /*finally {
             database.endTransaction();
-        }
+        }*/
     }
 
     public List<Task> getTasks(){

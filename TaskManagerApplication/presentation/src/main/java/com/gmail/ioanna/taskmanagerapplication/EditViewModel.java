@@ -64,11 +64,13 @@ public class EditViewModel implements BaseViewModel {
             task.setStartDate(startDate.get());
             task.setDueDate(dueDate.get());
         }catch(Exception e){
+            Log.e("button", "error");
             CreateViewModel.showError(activity);
         }
         manager.open(true);
         int count = manager.updateTask(task);
-        if(count == 1){
+        if(count == 100){
+            Log.e("count", "1");
             CreateViewModel.showError(activity);
         }
         Log.e("onClick edit", String.valueOf(count));
