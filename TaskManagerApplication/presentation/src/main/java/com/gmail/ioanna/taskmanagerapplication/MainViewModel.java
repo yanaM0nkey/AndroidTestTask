@@ -5,12 +5,11 @@ import android.app.Activity;
 import android.databinding.ObservableField;
 import android.util.Log;
 
-import com.gmail.ioanna.data.db.DBHelper;
 import com.gmail.ioanna.data.db.DatabaseManager;
 import com.gmail.ioanna.data.dbEntity.Task;
 import com.gmail.ioanna.taskmanagerapplication.base.BaseViewModel;
+import com.gmail.ioanna.taskmanagerapplication.recycleview.TaskAdapter;
 
-import java.text.ParseException;
 import java.util.List;
 
 public class MainViewModel implements BaseViewModel{

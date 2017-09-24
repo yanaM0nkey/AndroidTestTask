@@ -1,4 +1,4 @@
-package com.gmail.ioanna.taskmanagerapplication;
+package com.gmail.ioanna.taskmanagerapplication.recycleview;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.databinding.ObservableInt;
 import android.util.Log;
 
 import com.gmail.ioanna.data.dbEntity.Task;
+import com.gmail.ioanna.taskmanagerapplication.EditActivity;
 import com.gmail.ioanna.taskmanagerapplication.base.BaseItemViewModel;
 
 public class TaskItemViewModel extends BaseItemViewModel<Task> {

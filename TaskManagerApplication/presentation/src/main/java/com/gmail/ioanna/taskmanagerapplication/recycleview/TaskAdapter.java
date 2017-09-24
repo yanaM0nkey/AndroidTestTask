@@ -1,4 +1,4 @@
-package com.gmail.ioanna.taskmanagerapplication;
+package com.gmail.ioanna.taskmanagerapplication.recycleview;
 
 
 import android.app.Activity;

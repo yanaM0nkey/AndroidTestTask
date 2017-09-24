@@ -20,6 +20,14 @@ public class CreateActivity extends BaseAppCompatActivity {
                 .setContentView(this, R.layout.activity_create);
         binding.setModel(viewModel);
 
+        binding.spinner1Percents.setAdapter(viewModel.percentAdapter);
+        binding.spinner1Percents.setOnItemSelectedListener(viewModel.percentAdapter);
+        binding.spinner1Percents.setSelection(viewModel.percentListSelectedPosition);
+
+        binding.spinner1State.setAdapter(viewModel.stateAdapter);
+        binding.spinner1State.setOnItemSelectedListener(viewModel.stateAdapter);
+        binding.spinner1State.setSelection(viewModel.statetListSelectedPosition);
+
         super.onCreate(savedInstanceState);
 
     }

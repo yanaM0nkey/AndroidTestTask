@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.gmail.ioanna.taskmanagerapplication.TaskItemViewModel" />
+            type="com.gmail.ioanna.taskmanagerapplication.recycleview.TaskItemViewModel" />
 
     </data>
 

@@ -71,13 +71,13 @@
             android:text="@string/percentOfCompletion"
             android:textColor="@color/task_color"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/spinner2"
+            app:layout_constraintBottom_toTopOf="@+id/spinner2Percents"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-        <EditText
-            android:id="@+id/spinner2"
+        <Spinner
+            android:id="@+id/spinner2Percents"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -85,10 +85,6 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:hint="0-100"
-            android:inputType="number"
-            android:text="@={model.percentOfCompletion}"
-            android:textColorHint="@color/hint"
             app:layout_constraintBottom_toTopOf="@+id/textView3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -107,13 +103,13 @@
             android:text="@string/state"
             android:textColor="@color/task_color"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/spinner3"
+            app:layout_constraintBottom_toTopOf="@+id/spinner2State"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-        <EditText
-            android:id="@+id/spinner3"
+        <Spinner
+            android:id="@+id/spinner2State"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -121,9 +117,6 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:hint="New/In Progress/Done"
-            android:text="@={model.state}"
-            android:textColorHint="@color/hint"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -176,13 +169,13 @@
             android:text="@string/startDate"
             android:textColor="@color/task_color"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/editText3"
+            app:layout_constraintBottom_toTopOf="@+id/startDateEditText2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/startDateEditText2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -191,13 +184,16 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:hint="dd.mm.yyyy"
-            android:inputType="date"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:longClickable="false"
             android:text="@={model.startDate}"
             android:textColorHint="@color/hint"
             app:layout_constraintBottom_toTopOf="@+id/textView7"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="@{() -> model.startDateClick()}"/>
 
         <TextView
             android:id="@+id/textView7"
@@ -211,13 +207,13 @@
             android:text="@string/dueDate"
             android:textColor="@color/task_color"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/editText4"
+            app:layout_constraintBottom_toTopOf="@+id/dueDateEditText2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/dueDateEditText2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -226,13 +222,16 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:hint="dd.mm.yyyy"
-            android:inputType="date"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:longClickable="false"
             android:text="@={model.dueDate}"
             android:textColorHint="@color/hint"
             app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            android:onClick="@{() -> model.dueDateClick()}"/>
 
         <Button
             android:id="@+id/button"

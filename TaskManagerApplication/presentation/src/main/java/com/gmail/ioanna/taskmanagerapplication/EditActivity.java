@@ -17,6 +17,15 @@ public class EditActivity extends BaseAppCompatActivity{
         ActivityEditBinding binding = DataBindingUtil
                 .setContentView(this, R.layout.activity_edit);
         binding.setModel(viewModel);
+
+        binding.spinner2Percents.setAdapter(viewModel.percentAdapter);
+        binding.spinner2Percents.setOnItemSelectedListener(viewModel.percentAdapter);
+        binding.spinner2Percents.setSelection(viewModel.percentListSelectedPosition);
+
+        binding.spinner2State.setAdapter(viewModel.stateAdapter);
+        binding.spinner2State.setOnItemSelectedListener(viewModel.stateAdapter);
+        binding.spinner2State.setSelection(viewModel.statetListSelectedPosition);
+
         super.onCreate(savedInstanceState);
     }
 }
